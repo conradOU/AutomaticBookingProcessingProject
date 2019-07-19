@@ -84,8 +84,6 @@ CopyBookingIDandCheckIfNotCancellation()
 
 WinClose("[CLASS:MozillaWindowClass; REGEXPTITLE:^(?!.*Webmail).*$, "") ;regex works, but that function doesn't
 
-https://www.autoitscript.com/autoit3/docs/keywords/Switch.htm
-
 TO DO:
    -multidiamensional array with all the variables - but for what variables... for mouseclicks it doesn't make sense, and other pixelchecksum are very rare and doesn't make sense to make it as global variables
    -proper scr bin folder structure
