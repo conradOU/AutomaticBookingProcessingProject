@@ -6,8 +6,6 @@ What the test should do
    Prints paperwork including siteminder and tries to assign the room.
    This script will still print out canceled booking, which is how the script is supposed to behave.
 -----
-Parameters
-   Input: currently none
 #comments-end
 
 #include <AutoItConstants.au3>
@@ -84,7 +82,7 @@ CopyBookingIDandCheckIfNotCancellation()
 
 #cs archive/change log
 
-WinClose("[CLASS:MozillaWindowClass; REGEXPTITLE:^(?!.*Webmail).*$, "") ;regex works, but function doesn't
+WinClose("[CLASS:MozillaWindowClass; REGEXPTITLE:^(?!.*Webmail).*$, "") ;regex works, but that function doesn't
 
 https://www.autoitscript.com/autoit3/docs/keywords/Switch.htm
 
@@ -93,8 +91,5 @@ TO DO:
    -proper scr bin folder structure
 		maybe add Include folder for functions
    -do printout card details if that lock button doesn't exist
-   -posting the payment
-	  ask if the payment went thru or was declined
-		 if declined have it open the draft to len and fill it in
-   -change a lot of mouse clicks to just sending tabs when possible
+   -change mouse clicks to just sending tabs when possible
 #ce archive/change log
