@@ -1,5 +1,5 @@
 #include-once
-#include <misc.au3>
+#include<misc.au3>
 
 Func PrintOutSiteminderPaperwork()
 
@@ -8,7 +8,7 @@ Func PrintOutSiteminderPaperwork()
 
 		;steps necessary to printout the siteminder
 		$g_bIsItNecessaryToPrintOutSiteminder = True
-		_WinWaitActivate("Webmail", "")
+	   _WinWaitActivate("Webmail", "")
 		Sleep($LOADING_TIME_SLOW_PC_RELATED * 2) ;necessary here
 		Send("{END}")
 		Sleep($LOADING_TIME_SLOW_PC_RELATED)
@@ -28,20 +28,20 @@ Func PrintOutSiteminderPaperwork()
 ;~ 		Sleep($LOADING_TIME_SLOW_PC_RELATED)
 ;~ 		;some sleep time, then send ctrl+p to and then enter to print. That's only assuming you don't need to get the security key and that you're logged it.
 ;~ 		;after printing close the tab
-		;^above commented section doesn't work, because they change layout of that website way too often
-		MsgBox(0, "", "Pauses the script until the Ctrl+P is pressed. Takes control from there. Do not close the siteminder tab.")
-		Do
+;^above commented section doesn't work, because they change layout of that website way too often
+		 MsgBox(0, "", "Pauses the script until the Ctrl+P is pressed. Takes control from there. Do not close the siteminder tab.")
+		 Do
 			Sleep(100)
-		Until _IsPressed("11") And _IsPressed("50")   ;11 for ctrl key and 50 for p key
-		WinWaitNotActive("SiteMinder - Mozilla Firefox")
-		ControlClick("Print", "", "[CLASS:Button; INSTANCE:6]")
+		 Until  _IsPressed("11") And _IsPressed("50") ;11 for ctrl key and 50 for p key
+		 WinWaitNotActive("SiteMinder - Mozilla Firefox")
+		 ControlClick("Print", "", "[CLASS:Button; INSTANCE:6]")
 
-		Sleep($LOADING_TIME_SLOW_PC_RELATED)
-		Send("{ENTER}")
-		WinWaitNotActive("Print")
-		WinWaitNotActive("Printing")
+		 Sleep($LOADING_TIME_SLOW_PC_RELATED)
+		 Send("{ENTER}")
+		 WinWaitNotActive("Print")
+		 WinWaitNotActive("Printing")
 
-		Send("^w")  ;to close siteminder tab
+		 Send("^w") ;to close siteminder tab
 
 	EndIf
 

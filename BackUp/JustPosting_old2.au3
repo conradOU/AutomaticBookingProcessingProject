@@ -20,7 +20,7 @@ Func JustPosting(ByRef $amount)
 	Send("{DOWN 3}")
 	Sleep($LOADING_TIME_SLOW_PC_RELATED)
 	Send("{ENTER}")
-	MouseClick(375, 447, 1, 0)    ;switch to doing that with TAB keys not mouseclick
+	MouseClick(375, 447, 1, 0)	;switch to doing that with TAB keys not mouseclick
 	Sleep($LOADING_TIME_SLOW_PC_RELATED)
 	Send($amount)
 	MouseClick(399, 519, 2, 0)

@@ -15,13 +15,15 @@ Func PrintoutRegCard()
 
 	Sleep($LOADING_TIME_SLOW_PC_RELATED)
 	Send("^p") ;to print
-	_WinWaitActivate("Print", "")
-	Sleep($LOADING_TIME_SLOW_PC_RELATED*2)
+;~ 	_WinWaitActivate("Print", "")
+    WinWaitNotActive("Custom Registration Card")
 	ControlClick("Print", "", "[CLASS:Button; INSTANCE:6]")
 
 	Sleep($LOADING_TIME_SLOW_PC_RELATED)
 	Send("{ENTER}")
-	Sleep($LOADING_TIME_SLOW_PC_RELATED * 5)
+	WinWaitNotActive("Print")
+   WinWaitNotActive("Printing")
+;~ 	Sleep($LOADING_TIME_SLOW_PC_RELATED * 5)
 
 	Send("^w") ;closes the tab and goes back to the tab where you started
 	Sleep($LOADING_TIME_SLOW_PC_RELATED)

@@ -13,7 +13,7 @@ Func CheckBookingDate()
 	SafelyCopyHighlightedToClipboard()
 	$g_sSkywareArrivalRateNumberOfRooms = ClipGet()
 
-	$Result = StringTrimLeft($g_sSkywareArrivalRateNumberOfRooms, StringInStr($g_sSkywareArrivalRateNumberOfRooms, " on") + 2)
+    $Result = StringTrimLeft($g_sSkywareArrivalRateNumberOfRooms, StringInStr($g_sSkywareArrivalRateNumberOfRooms, " on") + 2)
 	$Result = StringStripWS($Result, 8) ;flag 8 used - $STR_STRIPALL (8) = strip all spaces (over-rides all other flags)
 	$Result = StringLeft($Result, 10)
 	$changeDateFormat = StringRight($Result, 4) & "/" & StringMid($Result, 4, 2) & "/" & StringLeft($Result, 2)

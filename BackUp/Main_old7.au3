@@ -29,17 +29,21 @@ Global $g_bIsItNecessaryToPrintOutSiteminder, $g_bWasItSiteminderBooking, $g_bIs
 Global $g_sClipboardWithBookingNumber, $g_sSkywareArrivalRateNumberOfRooms = ""
 Global Const $LOADING_TIME_SLOW_PC_RELATED = 600 ;don't go lower than that
 
-#Region --- YP PC variables ---
-;~ Global Const $g_iCheckSumSkywareIcon = 3487089813 ;YP PC
-;~ Global Const $g_iSiteminderWaitCheck = 1712426405 ;yp PC
-;~ Global Const $g_iSkywareSuccessfulRoomAllocation = 1520580581 ;albany left PC and YP PC
-#EndRegion --- YP PC variables ---
+If @UserName = "User1" Then ;if YP PC
+	Global Const $g_iCheckSumSkywareIcon = 3487089813
+	Global Const $g_iSiteminderWaitCheck = 1712426405
+	Global Const $g_iSkywareSuccessfulRoomAllocation = 1520580581
+	Global Const $g_sPrintOutWindowCharacterics = "[CLASS:MozillaWindowClass; X:395\Y:90\W:666\H:760]" ;could be handled by sending alt+f4
 
-#Region --- Albany left PC variables ---
-Global Const $g_iCheckSumSkywareIcon = 2675949942 ;albany left PC
-Global Const $g_iSiteminderWaitCheck = 1251178366 ;albany left PC
-Global Const $g_iSkywareSuccessfulRoomAllocation = 1520580581 ;albany left PC and YP PC
-#EndRegion --- Albany left PC variables ---
+ElseIf @UserName = "Ballantrae" Then ;if albany left PC
+	Global Const $g_iCheckSumSkywareIcon = 2675949942
+	Global Const $g_iSiteminderWaitCheck = 1251178366
+	Global Const $g_iSkywareSuccessfulRoomAllocation = 1520580581
+	Global Const $g_sPrintOutWindowCharacterics = "[CLASS:MozillaWindowClass; X:395\Y:90\W:666\H:732]"
+Else
+	MsgBox(0, "", "" & @UserName & " is unsupported")
+	Exit
+ EndIf
 
 #Region --- Albany right PC variables ---
 ;~ Global Const $g_iCheckSumSkywareIcon = 1948833437 ;albany right PC
@@ -56,6 +60,7 @@ Func _Au3RecordSetup()
 
 	Opt('WinWaitDelay', 100)
 	Opt('WinDetectHiddenText', 1)
+	Opt('WinTitleMatchMode', 2)
 
 EndFunc   ;==>_Au3RecordSetup
 
@@ -72,10 +77,13 @@ _Au3RecordSetup()
 MouseClick("left", 501, 150, 1, 0) ;clicks on the print button
 _WinWaitActivate("Print", "") ;that window name is always correct, at both hotels
 Sleep($LOADING_TIME_SLOW_PC_RELATED) ;necessary
-MouseClick("left", 489, 412, 1, 0)
+ControlClick("Print", "", "[CLASS:Button; INSTANCE:6]")
 Sleep($LOADING_TIME_SLOW_PC_RELATED)
-MouseClick("left", 765, 482, 1, 0)
-Sleep($LOADING_TIME_SLOW_PC_RELATED * 6)
+Send("{ENTER}")
+
+WinWaitNotActive("Print")
+WinWaitNotActive("Printing")
+_WinWaitActivate($g_sPrintOutWindowCharacterics, "")
 
 CopyBookingIDandCheckIfNotCancellation()
 
@@ -84,10 +92,22 @@ CopyBookingIDandCheckIfNotCancellation()
 
 WinClose("[CLASS:MozillaWindowClass; REGEXPTITLE:^(?!.*Webmail).*$, "") ;regex works, but function doesn't
 
+as of 21/7/2019 it takes 25 seconds to process a prepaid booking, mostly due to internet/system/internet speed delays
+
 TO DO:
    -multidiamensional array with all the variables - but for what variables... for mouseclicks it doesn't make sense, and other pixelchecksum are very rare and doesn't make sense to make it as global variables
    -proper scr bin folder structure
 		maybe add Include folder for functions
-   -do printout card details if that lock button doesn't exist
+   -if multiroom, still suggest posting with entry field for the amount taken
+   -make sure that it can handle not assigment of rooms too, have a way to check that somehow, then open skyware in the new tab and make script wait for key combination to continue
    -change mouse clicks to just sending tabs when possible
+   -printing commands are repetitive, put them into one function: (used in main, printoutregcard,printoutsiteminderpaperwork)
+	  _WinWaitActivate("Print", "") ;that window name is always correct, at both hotels
+	  Sleep($LOADING_TIME_SLOW_PC_RELATED) ;necessary
+	  ControlClick("Print", "", "[CLASS:Button; INSTANCE:6]")
+	  Sleep($LOADING_TIME_SLOW_PC_RELATED)
+	  Send("{ENTER}") ;fix that to window "Print, class button, instance 10"
+	  WinWaitNotActive("Print")
+	  WinWaitNotActive("Printing")
+
 #ce archive/change log
