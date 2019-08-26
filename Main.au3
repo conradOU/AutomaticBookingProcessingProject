@@ -6,7 +6,7 @@ What the test should do
    Prints paperwork including siteminder and tries to assign the room.
    This script will still print out canceled booking, which is how the script is supposed to behave.
 -----
-#comments-end  
+#comments-end
 
 #include <AutoItConstants.au3>
 #include "PrintOutSiteminderPaperwork.au3"
@@ -23,23 +23,29 @@ What the test should do
 #include "ReturnProjectedBalance.au3"
 #include "ReturnRate.au3"
 #include "CheckIfDeclinedOrPaid.au3"
+#include "PrintOut.au3"
+#include "AddPrepaidCommentOnSkyware.au3"
 
 #Region --- Global variables Start ---
 Global $g_bIsItNecessaryToPrintOutSiteminder, $g_bWasItSiteminderBooking, $g_bIsItForToday, $g_bIsItADV = False
 Global $g_sClipboardWithBookingNumber, $g_sSkywareArrivalRateNumberOfRooms = ""
 Global Const $LOADING_TIME_SLOW_PC_RELATED = 600 ;don't go lower than that
 
-If @UserName = "User1" Then ;if YP PC
+If @UserName = "User" Then ;if YP PC
 	Global Const $g_iCheckSumSkywareIcon = 3487089813
 	Global Const $g_iSiteminderWaitCheck = 1712426405
 	Global Const $g_iSkywareSuccessfulRoomAllocation = 1520580581
 	Global Const $g_sPrintOutWindowCharacterics = "[CLASS:MozillaWindowClass; X:395\Y:90\W:666\H:760]" ;could be handled by sending alt+f4
+	Global Const $g_sGreenColour = 0x39D77B
+	Global Const $g_iCheckSumRegCard = 3474790438
 
 ElseIf @UserName = "Ballantrae" Then ;if albany left PC
 	Global Const $g_iCheckSumSkywareIcon = 2675949942
 	Global Const $g_iSiteminderWaitCheck = 1251178366
 	Global Const $g_iSkywareSuccessfulRoomAllocation = 1520580581
 	Global Const $g_sPrintOutWindowCharacterics = "[CLASS:MozillaWindowClass; X:395\Y:90\W:666\H:732]"
+	Global Const $g_sGreenColour = 0x38D878
+	Global Const $g_iCheckSumRegCard = 1542064209
 Else
 	MsgBox(0, "", "" & @UserName & " is unsupported")
 	Exit
@@ -58,7 +64,7 @@ Global $g_aSkywareIconLocation[4] = [527, 9, 548, 18] ;to-do use multidimensiona
 #Region --- Internal functions Au3Recorder Start ---
 Func _Au3RecordSetup()
 
-	Opt('WinWaitDelay', 100)
+	;Opt('WinWaitDelay', 100)
 	Opt('WinDetectHiddenText', 1)
 	Opt('WinTitleMatchMode', 2)
 
@@ -74,15 +80,11 @@ EndFunc   ;==>_WinWaitActivate
 #EndRegion --- Internal functions Au3Recorder Start ---
 
 _Au3RecordSetup()
-MouseClick("left", 501, 150, 1, 0) ;clicks on the print button
-_WinWaitActivate("Print", "") ;that window name is always correct, at both hotels
-Sleep($LOADING_TIME_SLOW_PC_RELATED) ;necessary
-ControlClick("Print", "", "[CLASS:Button; INSTANCE:6]")
-Sleep($LOADING_TIME_SLOW_PC_RELATED)
-Send("{ENTER}")
 
-WinWaitNotActive("Print")
-WinWaitNotActive("Printing")
+_WinWaitActivate("Webmail - Mozilla Firefox", "")
+
+Send("{SHIFTDOWN}O{SHIFTUP}")
+
 _WinWaitActivate($g_sPrintOutWindowCharacterics, "")
 
 CopyBookingIDandCheckIfNotCancellation()
@@ -101,13 +103,5 @@ TO DO:
    -if multiroom, still suggest posting with entry field for the amount taken
    -make sure that it can handle not assigment of rooms too, have a way to check that somehow, then open skyware in the new tab and make script wait for key combination to continue
    -change mouse clicks to just sending tabs when possible
-   -printing commands are repetitive, put them into one function: (used in main, printoutregcard,printoutsiteminderpaperwork)
-	  _WinWaitActivate("Print", "") ;that window name is always correct, at both hotels
-	  Sleep($LOADING_TIME_SLOW_PC_RELATED) ;necessary
-	  ControlClick("Print", "", "[CLASS:Button; INSTANCE:6]")
-	  Sleep($LOADING_TIME_SLOW_PC_RELATED)
-	  Send("{ENTER}") ;fix that to window "Print, class button, instance 10"
-	  WinWaitNotActive("Print")
-	  WinWaitNotActive("Printing")
 
 #ce archive/change log

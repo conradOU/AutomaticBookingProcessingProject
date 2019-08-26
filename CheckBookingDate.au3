@@ -5,9 +5,9 @@ Func CheckBookingDate()
 
 	Local $dateFromSkyware, $changeDateFormat, $daysToArrival
 
-	MouseMove(344, 265, 0)
+	MouseMove(405, 266, 0)
 	MouseDown("left")
-	MouseMove(1409, 290, 0)
+	MouseMove(1394, 287, 0)
 	MouseUp("left")
 
 	SafelyCopyHighlightedToClipboard()

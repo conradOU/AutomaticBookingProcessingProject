@@ -2,8 +2,8 @@
 
 Func SearchByIdOnTheSkyware()
 
-	WinActivate("Webmail")
-	;WinWaitActive("Webmail")
+    WinActivate("Webmail")
+    ;WinWaitActive("Webmail")
 	Send("^5") ;navigates to the fifth tab, which is where you always have the Skyware open
 	Sleep($LOADING_TIME_SLOW_PC_RELATED)
 
@@ -31,12 +31,13 @@ Func SearchByIdOnTheSkyware()
 
 	CheckBookingDate()
 
-	If $g_bIsItForToday = False And _
-			StringRegExp($g_sClipboardWithBookingNumber, "(Expedia Collect Booking|virtual credit card|Agoda)") = True Then
-
-		 AddPrepaidCommentOnSkyware()
+	If $g_bIsItForToday = False And	_
+		StringRegExp($g_sClipboardWithBookingNumber, "(Expedia Collect Booking|virtual credit card|Agoda)") = True Then
 
 	EndIf
+
+
+
 
 	TryToAssignRoom()
 

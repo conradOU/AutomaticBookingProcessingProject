@@ -4,20 +4,41 @@ Func CopyBookingIDandCheckIfNotCancellation()
 
 	Local $sBookingID = ""
 
-	Sleep($LOADING_TIME_SLOW_PC_RELATED)
+	Sleep($LOADING_TIME_SLOW_PC_RELATED*4)
 
 	Send("^a") ;to highlight all
 	SafelyCopyHighlightedToClipboard()
 
-;~ WinClose("[CLASS:MozillaWindowClass; X:395\Y:90\W:666\H:732]")
-;~    WinWaitClose("[CLASS:MozillaWindowClass; X:395\Y:90\W:666\H:732]")
-	WinClose($g_sPrintOutWindowCharacterics)
-
 	$g_sClipboardWithBookingNumber = ClipGet()
 
-	If StringRegExp($g_sClipboardWithBookingNumber, "(Cancellation Charge|Reservation Cancellation|THE FOLLOWING RESERVATION HAS BEEN CANCELLED)") = True Then Exit
+	If StringRegExp($g_sClipboardWithBookingNumber, "(Cancellation Charge|Reservation Cancellation|THE FOLLOWING RESERVATION HAS BEEN CANCELLED)") = True Then
+
+	   Send("^p") ;to print
+	   _WinWaitActivate("Print", "") ;that window name is always correct, at both hotels
+	   Sleep($LOADING_TIME_SLOW_PC_RELATED) ;necessary
+
+	   PrintOut()
+
+	   WinClose($g_sPrintOutWindowCharacterics)
+
+	   Exit
+	EndIf
+
 	If StringRegExp($g_sClipboardWithBookingNumber, "(SiteMinder)") = True Then $g_bWasItSiteminderBooking = True
 	If StringRegExp($g_sClipboardWithBookingNumber, "(Non-refundable|Advanced Purchase|non refundable|Non Refundable)") = True Then $g_bIsItADV = True
+
+    If StringRegExp($g_sClipboardWithBookingNumber, "Agoda") = False And _
+			StringRegExp($g_sClipboardWithBookingNumber, "(Expedia Collect Booking|virtual credit card)") = False Then
+
+	  Send("^p") ;to print
+	  _WinWaitActivate("Print", "") ;that window name is always correct, at both hotels
+	  Sleep($LOADING_TIME_SLOW_PC_RELATED) ;necessary
+
+	  PrintOut()
+
+    EndIf
+
+    WinClose($g_sPrintOutWindowCharacterics)
 
 	$sBookingID = StringRegExp($g_sClipboardWithBookingNumber, "([0-9,B]{8,15})", 1)
 	If @error Then Exit MsgBox(0, "Error", "StringRegExp returned error, if 1 then it wasn't able to find booking ID: " & @error)
