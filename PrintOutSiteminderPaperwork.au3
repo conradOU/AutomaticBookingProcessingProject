@@ -10,6 +10,8 @@ Func PrintOutSiteminderPaperwork()
 		$g_bIsItNecessaryToPrintOutSiteminder = True
 		_WinWaitActivate("Webmail", "")
 		Sleep($LOADING_TIME_SLOW_PC_RELATED * 2) ;necessary here
+		MouseClick("left", 1400, 282, 1, 0)
+		Sleep($LOADING_TIME_SLOW_PC_RELATED)
 		Send("{END}")
 		Sleep($LOADING_TIME_SLOW_PC_RELATED)
 
