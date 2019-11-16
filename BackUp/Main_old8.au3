@@ -6,7 +6,7 @@ What the test should do
    Prints paperwork including siteminder and tries to assign the room.
    This script will still print out canceled booking, which is how the script is supposed to behave.
 -----
-#comments-end  
+#comments-end
 
 #include <AutoItConstants.au3>
 #include "PrintOutSiteminderPaperwork.au3"
