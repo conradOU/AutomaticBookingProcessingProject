@@ -6,7 +6,7 @@ What the test should do
    Prints paperwork including siteminder and tries to assign the room.
    This script will still print out canceled booking, which is how the script is supposed to behave.
 -----
-#comments-end  
+#comments-end
 
 #include <AutoItConstants.au3>
 #include "PrintOutSiteminderPaperwork.au3"
@@ -25,6 +25,7 @@ What the test should do
 #include "CheckIfDeclinedOrPaid.au3"
 #include "PrintOut.au3"
 #include "AddPrepaidCommentOnSkyware.au3"
+#include "HighlightAllAndCopy.au3"
 
 #Region --- Global variables Start ---
 Global $g_bIsItNecessaryToPrintOutSiteminder, $g_bWasItSiteminderBooking, $g_bIsItForToday, $g_bIsItADV = False
@@ -83,7 +84,7 @@ _Au3RecordSetup()
 
 _WinWaitActivate("Webmail - Mozilla Firefox", "")
 
-Send("{SHIFTDOWN}O{SHIFTUP}")
+Send("{SHIFTDOWN}O{SHIFTUP}") ;opens the pop up. This sortcut is set by website's JavaScript
 
 _WinWaitActivate($g_sPrintOutWindowCharacterics, "")
 
