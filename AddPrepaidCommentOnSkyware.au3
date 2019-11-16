@@ -6,8 +6,9 @@ Func AddPrepaidCommentOnSkyware()
 	Sleep($LOADING_TIME_SLOW_PC_RELATED)
 	Send("**Comments**")
 	Sleep($LOADING_TIME_SLOW_PC_RELATED)
-
 	Local $aCoord = PixelSearch(350, 300, 800, 820, $g_sGreenColour) ;searches for the highlighted green, Albany
+    Send("{ESC}") ;to close the search box
+
 	MouseClick("left", $aCoord[0], $aCoord[1], 1, 0) ;location of the comment section
 	Sleep($LOADING_TIME_SLOW_PC_RELATED)
 	Send("{TAB}") ;to enter comment section

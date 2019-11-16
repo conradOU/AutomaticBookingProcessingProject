@@ -29,7 +29,7 @@ What the test should do
 #Region --- Global variables Start ---
 Global $g_bIsItNecessaryToPrintOutSiteminder, $g_bWasItSiteminderBooking, $g_bIsItForToday, $g_bIsItADV = False
 Global $g_sClipboardWithBookingNumber, $g_sSkywareArrivalRateNumberOfRooms = ""
-Global Const $LOADING_TIME_SLOW_PC_RELATED = 600 ;don't go lower than that
+Global Const $LOADING_TIME_SLOW_PC_RELATED = 800 ;don't go lower than that
 
 If @UserName = "User" Then ;if YP PC
 	Global Const $g_iCheckSumSkywareIcon = 3487089813

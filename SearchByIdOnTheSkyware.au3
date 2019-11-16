@@ -2,7 +2,7 @@
 
 Func SearchByIdOnTheSkyware()
 
-	WinActivate("Webmail")
+	WinActivate("Webmail - Mozilla Firefox")
 	;WinWaitActive("Webmail")
 	Send("^5") ;navigates to the fifth tab, which is where you always have the Skyware open
 	Sleep($LOADING_TIME_SLOW_PC_RELATED)
@@ -11,6 +11,10 @@ Func SearchByIdOnTheSkyware()
 		Send("{ENTER}") ;in case if there are any pop-ups (if Skyware was left on some reservation and not default page), if there are none that enter doesn't do "harm"
 		Sleep(100)
 	WEnd
+
+   Sleep($LOADING_TIME_SLOW_PC_RELATED)
+   Send("{PGUP}")
+   Sleep($LOADING_TIME_SLOW_PC_RELATED)
 
 	MouseClick("left", 700, 140, 2, 0) ;clicks twice on the field next to search button on the Skyware, twice as if there is anything there it would select it and then get replaced by ctrl+v key compination
 	Send("^v") ;pastes the clipboard
