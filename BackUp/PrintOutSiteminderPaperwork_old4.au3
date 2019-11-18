@@ -17,7 +17,7 @@ Func PrintOutSiteminderPaperwork()
 
 		MouseClick("left", 873, 742, 1, 0)     ;clicks on the siteminder link, it will automatically open a new tab
 
-		TrayTip("", "Pauses the script until the Ctrl+P is pressed. Takes control from there. Do not close the siteminder tab.", 5)
+	    TrayTip("", "Pauses the script until the Ctrl+P is pressed. Takes control from there. Do not close the siteminder tab.", 5)
 
 		Do
 			Sleep(100)

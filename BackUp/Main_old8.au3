@@ -25,7 +25,6 @@ What the test should do
 #include "CheckIfDeclinedOrPaid.au3"
 #include "PrintOut.au3"
 #include "AddPrepaidCommentOnSkyware.au3"
-#include "HighlightAllAndCopy.au3"
 
 #Region --- Global variables Start ---
 Global $g_bIsItNecessaryToPrintOutSiteminder, $g_bWasItSiteminderBooking, $g_bIsItForToday, $g_bIsItADV = False
@@ -84,7 +83,7 @@ _Au3RecordSetup()
 
 _WinWaitActivate("Webmail - Mozilla Firefox", "")
 
-Send("{SHIFTDOWN}O{SHIFTUP}") ;opens the pop up. This sortcut is set by website's JavaScript
+Send("{SHIFTDOWN}O{SHIFTUP}")
 
 _WinWaitActivate($g_sPrintOutWindowCharacterics, "")
 

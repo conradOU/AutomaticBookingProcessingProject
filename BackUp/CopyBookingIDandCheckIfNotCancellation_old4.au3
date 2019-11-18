@@ -4,36 +4,49 @@ Func CopyBookingIDandCheckIfNotCancellation()
 
 	Local $sBookingID = ""
 
-	HighlightAllAndCopy()
+	Sleep($LOADING_TIME_SLOW_PC_RELATED*4)
+
+	Send("^a") ;to highlight all
+	SafelyCopyHighlightedToClipboard()
+
+	$g_sClipboardWithBookingNumber = ClipGet()
+	;now check if clipboard is not empty, as that would indicate potential error, be it not loaded page or something else.
+	If @error Then ;if clipboard is empty OR contains a non-text entry OR cannot access the clipboard
+
+		Sleep($LOADING_TIME_SLOW_PC_RELATED*4)
+
+		Send("^a") ;to highlight all
+		SafelyCopyHighlightedToClipboard()
+	EndIf
 
 	If StringRegExp($g_sClipboardWithBookingNumber, "(Cancellation Charge|Reservation Cancellation|THE FOLLOWING RESERVATION HAS BEEN CANCELLED)") = True Then
 
-		Send("^p") ;to print
-		_WinWaitActivate("Print", "") ;that window name is always correct, at both hotels
-		Sleep($LOADING_TIME_SLOW_PC_RELATED) ;necessary
+	   Send("^p") ;to print
+	   _WinWaitActivate("Print", "") ;that window name is always correct, at both hotels
+	   Sleep($LOADING_TIME_SLOW_PC_RELATED) ;necessary
 
-		PrintOut()
+	   PrintOut()
 
-		WinClose($g_sPrintOutWindowCharacterics)
+	   WinClose($g_sPrintOutWindowCharacterics)
 
-		Exit
+	   Exit
 	EndIf
 
 	If StringRegExp($g_sClipboardWithBookingNumber, "(SiteMinder)") = True Then $g_bWasItSiteminderBooking = True
 	If StringRegExp($g_sClipboardWithBookingNumber, "(Non-refundable|Advanced Purchase|non refundable|Non Refundable)") = True Then $g_bIsItADV = True
 
-	If StringRegExp($g_sClipboardWithBookingNumber, "Agoda") = False And _
+    If StringRegExp($g_sClipboardWithBookingNumber, "Agoda") = False And _
 			StringRegExp($g_sClipboardWithBookingNumber, "(Expedia Collect Booking|virtual credit card)") = False Then
 
-		Send("^p") ;to print
-		_WinWaitActivate("Print", "") ;that window name is always correct, at both hotels
-		Sleep($LOADING_TIME_SLOW_PC_RELATED) ;necessary
+	  Send("^p") ;to print
+	  _WinWaitActivate("Print", "") ;that window name is always correct, at both hotels
+	  Sleep($LOADING_TIME_SLOW_PC_RELATED) ;necessary
 
-		PrintOut()
+	  PrintOut()
 
-	EndIf
+    EndIf
 
-	WinClose($g_sPrintOutWindowCharacterics)
+    WinClose($g_sPrintOutWindowCharacterics)
 
 	$sBookingID = StringRegExp($g_sClipboardWithBookingNumber, "([0-9,B]{8,15})", 1)
 	If @error Then Exit MsgBox(0, "Error", "StringRegExp returned error, if 1 then it wasn't able to find booking ID: " & @error)

@@ -66,7 +66,7 @@ Func TryToAssignRoom()
 			Else
 
 				Opt("SendKeyDelay", 15)
-				Send("{SHIFTDOWN}{TAB 23}{SHIFTUP}{ENTER}")
+				Send("{SHIFTDOWN}{TAB 25}{SHIFTUP}{ENTER}")
 				Opt("SendKeyDelay", Default) ;selects and clicks the finish button
 
 ;~ 				MouseClick("left", 918, 248, 1, 0) ;clicks the finish button
