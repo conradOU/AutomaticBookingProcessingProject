@@ -2,7 +2,7 @@
 
 #include <misc.au3>
 
-Global $LOADING_TIME_SLOW_PC_RELATED = 700
+Global $LOADING_TIME_SLOW_PC_RELATED = 800
 
 Opt('WinDetectHiddenText', 1)
 Opt('WinTitleMatchMode', 2)

@@ -1,6 +1,6 @@
 #include <AutoItConstants.au3>
 
-Global Const $LOADING_TIME_SLOW_PC_RELATED = 600 ;don't go lower than that
+Global Const $LOADING_TIME_SLOW_PC_RELATED = 800 ;don't go lower than that
 
 If @UserName = "User" Then ;if YP PC
 	Run(@ProgramFilesDir & "\Mozilla Firefox\firefox.exe", "", @SW_SHOWMAXIMIZED) ;tested at the YP
