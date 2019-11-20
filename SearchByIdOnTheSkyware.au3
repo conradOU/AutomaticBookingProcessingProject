@@ -2,8 +2,8 @@
 
 Func SearchByIdOnTheSkyware()
 
-	WinActivate("Webmail - Mozilla Firefox")
-	;WinWaitActive("Webmail")
+	;WinActivate("Webmail - Mozilla Firefox")
+	WinWaitActivate("Webmail", "")
 	Send("^5") ;navigates to the fifth tab, which is where you always have the Skyware open
 	Sleep($LOADING_TIME_SLOW_PC_RELATED)
 

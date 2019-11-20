@@ -12,12 +12,8 @@ Func PrintoutRegCard()
 	WEnd
 
 	Sleep($LOADING_TIME_SLOW_PC_RELATED)
-	Send("^p") ;to print
-	WinWaitNotActive("Custom Registration Card")
 
-    Sleep($LOADING_TIME_SLOW_PC_RELATED) ;necessary here
 	PrintOut()
-    Sleep($LOADING_TIME_SLOW_PC_RELATED)
 
 	Send("^w") ;closes the tab and goes back to the tab where you started
 	Sleep($LOADING_TIME_SLOW_PC_RELATED)

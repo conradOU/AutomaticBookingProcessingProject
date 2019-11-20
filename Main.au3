@@ -65,7 +65,7 @@ Global $g_aSkywareIconLocation[4] = [527, 9, 548, 18] ;to-do use multidimensiona
 #Region --- Internal functions Au3Recorder Start ---
 Func _Au3RecordSetup()
 
-	;Opt('WinWaitDelay', 100)
+	;Opt('WinWaitDelay', 100) ;default is 250
 	Opt('WinDetectHiddenText', 1)
 	Opt('WinTitleMatchMode', 2)
 
@@ -104,5 +104,6 @@ TO DO:
    -if multiroom, still suggest posting with entry field for the amount taken
    -make sure that it can handle not assigment of rooms too, have a way to check that somehow, then open skyware in the new tab and make script wait for key combination to continue
    -change mouse clicks to just sending tabs when possible
+   -printing could happen in the background, further speeding up the script, although you would need to take necessry precautions. Speeding up the script is also not a priority right now
 
 #ce archive/change log

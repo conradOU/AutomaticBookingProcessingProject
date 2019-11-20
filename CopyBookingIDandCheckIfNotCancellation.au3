@@ -8,15 +8,12 @@ Func CopyBookingIDandCheckIfNotCancellation()
 
 	If StringRegExp($g_sClipboardWithBookingNumber, "(Cancellation Charge|Reservation Cancellation|THE FOLLOWING RESERVATION HAS BEEN CANCELLED)") = True Then
 
-		Send("^p") ;to print
-		_WinWaitActivate("Print", "") ;that window name is always correct, at both hotels
-		Sleep($LOADING_TIME_SLOW_PC_RELATED) ;necessary
-
 		PrintOut()
 
 		WinClose($g_sPrintOutWindowCharacterics)
 
 		Exit
+
 	EndIf
 
 	If StringRegExp($g_sClipboardWithBookingNumber, "(SiteMinder)") = True Then $g_bWasItSiteminderBooking = True
@@ -24,10 +21,6 @@ Func CopyBookingIDandCheckIfNotCancellation()
 
 	If StringRegExp($g_sClipboardWithBookingNumber, "Agoda") = False And _
 			StringRegExp($g_sClipboardWithBookingNumber, "(Expedia Collect Booking|virtual credit card)") = False Then
-
-		Send("^p") ;to print
-		_WinWaitActivate("Print", "") ;that window name is always correct, at both hotels
-		Sleep($LOADING_TIME_SLOW_PC_RELATED) ;necessary
 
 		PrintOut()
 
@@ -41,7 +34,7 @@ Func CopyBookingIDandCheckIfNotCancellation()
 	PrintOutSiteminderPaperwork()    ;logically if cancellation, then it won't print out the skyware, as the program won't get to this point if it was a cancellation
 	If ClipPut($sBookingID[0]) = False Then MsgBox(0, "Error", "Clipboard didn't change")
 
-	Sleep($LOADING_TIME_SLOW_PC_RELATED) ;because it was too fast and ctrl5 was being set to the the wrong window
+	;Sleep($LOADING_TIME_SLOW_PC_RELATED) ;because it was too fast and ctrl5 was being set to the the wrong window
 	SearchByIdOnTheSkyware()
 
 EndFunc   ;==>CopyBookingIDandCheckIfNotCancellation
