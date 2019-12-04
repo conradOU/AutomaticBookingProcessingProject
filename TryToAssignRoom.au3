@@ -59,7 +59,7 @@ Func TryToAssignRoom()
 		Sleep($LOADING_TIME_SLOW_PC_RELATED)
 
 		If $g_iSkywareSuccessfulRoomAllocation <> PixelChecksum(762, 391, 780, 400) Then
-			If $g_bIsItNecessaryToPrintOutSiteminder = True Or $g_bWasItSiteminderBooking = True Or $g_bIsItForToday = True Then
+			If $g_bIsItNecessaryToPrintOutSiteminder Or $g_bWasItSiteminderBooking Or $g_bIsItForToday Then
 				MouseClick("left", 522, 805, 1, 0) ;clicks to uncover the card details, to allow charging, only does it if the card isn't prepaid and you were able to automatically allocate the room, hence the check
 				Sleep($LOADING_TIME_SLOW_PC_RELATED) ;important here, don't remove it
 				CheckIfDeclinedOrPaid()

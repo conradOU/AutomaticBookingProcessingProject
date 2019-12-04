@@ -104,6 +104,7 @@ TO DO:
    -if multiroom, still suggest posting with entry field for the amount taken
    -make sure that it can handle not assigment of rooms too, have a way to check that somehow, then open skyware in the new tab and make script wait for key combination to continue
    -change mouse clicks to just sending tabs when possible
-   -printing could happen in the background, further speeding up the script, although you would need to take necessry precautions. Speeding up the script is also not a priority right now
+   -printing could happen in the background, further speeding up the script, although you would need to take necessry precautions -
+		making sure the previous window is active. Speeding up the script is also not a priority right now
 
 #ce archive/change log

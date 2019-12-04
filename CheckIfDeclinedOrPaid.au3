@@ -8,9 +8,9 @@ Func CheckIfDeclinedOrPaid()
 
 	Local $bContinueWithPosting, $bIsDeclined, $amount = False
 
-	If $g_bIsItForToday = True And $g_bIsItNecessaryToPrintOutSiteminder = False And $g_bWasItSiteminderBooking = False Then
+	If $g_bIsItForToday And $g_bIsItNecessaryToPrintOutSiteminder = False And $g_bWasItSiteminderBooking = False Then
 		$amount = ReturnProjectedBalance() ;that covers you for prepaids, except for Siteminder bookings
-	ElseIf $g_bIsItADV = True Then
+	ElseIf $g_bIsItADV Then
 		$amount = ReturnProjectedBalance()
 	Else
 		$amount = ReturnRate()
@@ -39,8 +39,8 @@ Func CheckIfDeclinedOrPaid()
 
 	Sleep(3000)
 
-	If $bIsDeclined = True Then EmailDeclainedBookingToLen()
+	If $bIsDeclined Then EmailDeclainedBookingToLen()
 
-	If $bContinueWithPosting = True Then PostPaymentOnSkyware($amount)
+	If $bContinueWithPosting Then PostPaymentOnSkyware($amount)
 
 EndFunc   ;==>CheckIfDeclinedOrPaid

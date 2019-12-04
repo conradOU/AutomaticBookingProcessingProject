@@ -20,7 +20,7 @@ Func PostPaymentOnSkyware($amount)
 
 	Sleep($LOADING_TIME_SLOW_PC_RELATED * 3) ;necessary here
 
-	If $g_bIsItForToday = True Then
+	If $g_bIsItForToday Then
 		MouseClick("left", 710, 173, 1, 0)        ;if it's for today and after night audit, Skyware adds an extra check in button, which shifts the location of the gold coin. Also same as 8 tabs and enter
 	Else
 		MouseClick("left", 674, 174, 1, 0)    ;clicks goldcoin, also same as 7 tabs and enter

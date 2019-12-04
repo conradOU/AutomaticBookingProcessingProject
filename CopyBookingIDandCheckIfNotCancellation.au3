@@ -6,7 +6,7 @@ Func CopyBookingIDandCheckIfNotCancellation()
 
 	HighlightAllAndCopy()
 
-	If StringRegExp($g_sClipboardWithBookingNumber, "(Cancellation Charge|Reservation Cancellation|THE FOLLOWING RESERVATION HAS BEEN CANCELLED)") = True Then
+	If StringRegExp($g_sClipboardWithBookingNumber, "(Cancellation Charge|Reservation Cancellation|THE FOLLOWING RESERVATION HAS BEEN CANCELLED)") Then
 
 		PrintOut()
 
@@ -16,8 +16,8 @@ Func CopyBookingIDandCheckIfNotCancellation()
 
 	EndIf
 
-	If StringRegExp($g_sClipboardWithBookingNumber, "(SiteMinder)") = True Then $g_bWasItSiteminderBooking = True
-	If StringRegExp($g_sClipboardWithBookingNumber, "(Non-refundable|Advanced Purchase|non refundable|Non Refundable)") = True Then $g_bIsItADV = True
+	If StringRegExp($g_sClipboardWithBookingNumber, "(SiteMinder)") Then $g_bWasItSiteminderBooking = True
+	If StringRegExp($g_sClipboardWithBookingNumber, "(Non-refundable|Advanced Purchase|non refundable|Non Refundable)") Then $g_bIsItADV = True
 
 	If StringRegExp($g_sClipboardWithBookingNumber, "Agoda") = False And _
 			StringRegExp($g_sClipboardWithBookingNumber, "(Expedia Collect Booking|virtual credit card)") = False Then
