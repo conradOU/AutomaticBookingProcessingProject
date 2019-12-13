@@ -26,6 +26,7 @@ What the test should do
 #include "PrintOut.au3"
 #include "AddPrepaidCommentOnSkyware.au3"
 #include "HighlightAllAndCopy.au3"
+#include "_WinWaitActivate.au3"
 
 #Region --- Global variables Start ---
 Global $g_bIsItNecessaryToPrintOutSiteminder, $g_bWasItSiteminderBooking, $g_bIsItForToday, $g_bIsItADV = False
@@ -70,14 +71,6 @@ Func _Au3RecordSetup()
 	Opt('WinTitleMatchMode', 2)
 
 EndFunc   ;==>_Au3RecordSetup
-
-Func _WinWaitActivate($title, $text, $timeout = 0)
-
-	;WinWait($title,$text,$timeout) ;waiting for a window to even exist in the first place
-	If Not WinActive($title, $text) Then WinActivate($title, $text)
-	WinWaitActive($title, $text, $timeout)
-
-EndFunc   ;==>_WinWaitActivate
 #EndRegion --- Internal functions Au3Recorder Start ---
 
 _Au3RecordSetup()

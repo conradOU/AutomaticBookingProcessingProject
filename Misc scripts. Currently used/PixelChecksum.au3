@@ -7,7 +7,14 @@
 ; Wait until something changes in the region 0,0 to 50,50
 
 ; Get initial checksum
+
+Local $iYcoordinates = 256
+
+
+
 Sleep(4000)
 
-ClipPut(PixelChecksum(527, 11, 548, 18))
+ClipPut(PixelGetColor(427, $iYcoordinates+(21*7)))
+
+
 

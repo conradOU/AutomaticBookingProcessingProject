@@ -25,7 +25,7 @@ Func CheckIfDeclinedOrPaid()
 		$idMsg = GUIGetMsg()
 		Switch $idMsg
 			Case $GUI_EVENT_CLOSE
-				Exit ;clould be ExitLoop but since you there will be no more steps, you can just exit the program
+				ExitLoop ;clould be Exit but since you might close it by accident, and still want to proceed...
 			Case $idBtnPost
 				$bContinueWithPosting = True
 				ExitLoop

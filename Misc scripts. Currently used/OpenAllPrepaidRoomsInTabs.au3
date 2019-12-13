@@ -2,7 +2,6 @@
 #include <GuiConstants.au3>
 #include <Array.au3>
 
-#AutoIt3Wrapper_Run_Au3Check=N
 
 Global $LOADING_TIME_SLOW_PC_RELATED = 800
 Global $array[0]

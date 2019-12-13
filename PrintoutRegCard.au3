@@ -7,7 +7,7 @@ Func PrintoutRegCard()
 	Sleep($LOADING_TIME_SLOW_PC_RELATED)
 	Send("{TAB 6}{ENTER}") ;more accurate than clicking
 
-	While $g_iCheckSumRegCard <> PixelChecksum(463, 122, 499, 176) ;tested on the left PC at the Albany
+	While $g_iCheckSumRegCard <> PixelChecksum(463, 122, 499, 176) ;tested on the left PC at the Albany and YP
 		Sleep(100)
 	WEnd
 
