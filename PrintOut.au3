@@ -1,3 +1,5 @@
+#include "Constants.au3"
+
 #include-once
 
 Func PrintOut()

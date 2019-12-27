@@ -5,8 +5,8 @@
 #include <GUIConstantsEx.au3>
 #include "..\PrintOut.au3"
 #include "..\_WinWaitActivate.au3"
+#include "..\Constants.au3"
 
-Global Const $LOADING_TIME_SLOW_PC_RELATED = 800 ;don't go lower than that
 Local $fTotal, $fCashTotal, $fXread
 Local $bSetPrint = False
 

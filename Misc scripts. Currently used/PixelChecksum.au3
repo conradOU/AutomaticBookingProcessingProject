@@ -8,13 +8,9 @@
 
 ; Get initial checksum
 
-Local $iYcoordinates = 256
-
-
-
 Sleep(4000)
 
-ClipPut(PixelGetColor(427, $iYcoordinates+(21*7)))
+ClipPut(PixelChecksum(5, 840, 30, 855))
 
-
+MsgBox(Default,"","")
 

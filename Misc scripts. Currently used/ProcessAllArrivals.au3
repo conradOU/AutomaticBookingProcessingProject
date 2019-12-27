@@ -1,9 +1,12 @@
 #include <Array.au3>
+#include "..\PrintOut.au3"
+#include "..\CheckIfPageIsLoaded.au3"
+#include "..\SafelyCopyHighlightedToClipboard.au3"
+#include "..\Constants.au3"
 
 Global $array[0]
 Global $sRoomChartAddress
 Global $aGlobalResult[0]
-Global $LOADING_TIME_SLOW_PC_RELATED = 800
 Global $aYProoms[31] = [101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,20,21,22,23,24,25,26,27,28,29,30,31]
 Global $aAlbanyRooms[42] = [100,101,102,103,104,105,106,201,202,203,204,205,206,207,208,209,210,301,302,303,304,305,306,307,308,309,310,311,312,313,401,402,403,404,405,406,407,408,409,410,411,412]
 
@@ -16,9 +19,7 @@ EndIf
 WinWaitActive("Select Guest to Check-in for: - Mozilla Firefox")
 Sleep($LOADING_TIME_SLOW_PC_RELATED) ;it was too fast and clipboard wasn't always changing immediately
 Send("^a")
-Sleep($LOADING_TIME_SLOW_PC_RELATED) ;it was too fast and clipboard wasn't always changing immediately
-Send("^c") ;to copy
-Sleep($LOADING_TIME_SLOW_PC_RELATED) ;it was too fast and clipboard wasn't always changing immediately
+SafelyCopyHighlightedToClipboard()
 
 $g_sRawWebContent = ClipGet()
 $aResult = StringSplit($g_sRawWebContent, @CRLF, 1)
@@ -60,7 +61,8 @@ Func Continue()
 	Send("{CTRLDOWN}v{CTRLUP}")
 	Sleep($LOADING_TIME_SLOW_PC_RELATED)
 	Send("{ENTER}")
-	Sleep($LOADING_TIME_SLOW_PC_RELATED * 12)
+	;~ Sleep($LOADING_TIME_SLOW_PC_RELATED * 12)
+	CheckIfPageIsLoaded()
 
 	For $room = 1 To 42 Step 1
 		If $room = 26 Then
@@ -81,7 +83,7 @@ Func Continue()
 
 		If _ArraySearch($aGlobalResult, $aYProoms[$room-1]) <> -1 Then  ;if room was selected, then click on it, sleep, then move back to the tab 5
 			MouseClick("left", $iXcoordinates, $iYcoordinates, 2, 1)
-			Sleep($LOADING_TIME_SLOW_PC_RELATED)
+			Sleep($LOADING_TIME_SLOW_PC_RELATED*2) ;just one here wasn't enough
 			Send("{CTRLDOWN}5{CTRLUP}")   ;move back to the tab 5 with room chart open
 			Sleep($LOADING_TIME_SLOW_PC_RELATED)
 
@@ -96,7 +98,8 @@ Func Continue()
 	Next
 
 	Send("{CTRLDOWN}{PGDN}{CTRLUP}") ; {PGUP}
-	Sleep($LOADING_TIME_SLOW_PC_RELATED * 4)
+;~ 	Sleep($LOADING_TIME_SLOW_PC_RELATED)
+	CheckIfPageIsLoaded()
 
 	Run('"' & @AutoItExe & '" /AutoIt3ExecuteScript "' & "PostFullAmountForPrepaid.au3" & '"')
 

@@ -1,8 +1,9 @@
 ;~ Posts full amount to speed up deposit taking for prepaid cards (in the morning). Middle click to continue after taking the deposit
 
 #include <misc.au3>
-
-Global $LOADING_TIME_SLOW_PC_RELATED = 800
+#include "..\CheckIfPageIsLoaded.au3"
+#include "..\SafelyCopyHighlightedToClipboard.au3"
+#include "..\Constants.au3"
 
 Opt('WinDetectHiddenText', 1)
 Opt('WinTitleMatchMode', 2)
@@ -20,8 +21,6 @@ Func ProcessBooking()
 
 	  Send("{ENTER}")
 
-;~ 	  MouseClick("left", 704, 576, 1, 0) ;clicks on the payment tab
-;~ 	  Sleep($LOADING_TIME_SLOW_PC_RELATED)
 	  Sleep($LOADING_TIME_SLOW_PC_RELATED)
 	  Send("{CTRLDOWN}f{CTRLUP}")
 	  Sleep($LOADING_TIME_SLOW_PC_RELATED)
@@ -36,6 +35,8 @@ Func ProcessBooking()
 		 MsgBox(0, "", "" & @UserName & " is unsupported")
 	  Exit
 	  EndIf
+
+	  Send("{ESC}") ;in order to close the search thingy, so that CheckIfPageIsLoaded() can end up being fully utilized
 
 	  MouseClick("left", $aCoord[0], $aCoord[1], 1, 0) ;location of the Payment section
 	  Sleep($LOADING_TIME_SLOW_PC_RELATED)
@@ -54,14 +55,15 @@ Func ProcessBooking()
 	  MouseMove(1152, 270, 0)
 	  MouseUp("left")
 
-	  Sleep($LOADING_TIME_SLOW_PC_RELATED) ;it was too fast and clipboard wasn't always changing immediately
-	  Send("^c") ;to copy
-	  Sleep($LOADING_TIME_SLOW_PC_RELATED) ;it was too fast and clipboard wasn't always changing immediately
+	  SafelyCopyHighlightedToClipboard()
 
 	  ClipPut(StringStripWS(ClipGet(), 8))
 
 	  MouseClick("left", 710, 173, 1, 0) ;gold coin
-	  Sleep(5000)
+	;~   Sleep(5000) ;that's where you will use CheckIfPageIsLoaded()
+
+	  CheckIfPageIsLoaded()
+
 	  Send("{ENTER}")
 
 	  Sleep($LOADING_TIME_SLOW_PC_RELATED)
@@ -97,15 +99,19 @@ Func ProcessBooking()
 	  Sleep($LOADING_TIME_SLOW_PC_RELATED)
 	  Send("{ENTER}")
 
-	  Sleep(5000)
+	;~   Sleep(5000)
 
-	  Sleep($LOADING_TIME_SLOW_PC_RELATED * 3)
+	;~   Sleep($LOADING_TIME_SLOW_PC_RELATED * 3)
+
+	  CheckIfPageIsLoaded()
+
 	  Send("{SHIFTDOWN}{TAB 2}{SHIFTUP}")
 	  Sleep($LOADING_TIME_SLOW_PC_RELATED)
 	  Send("{ENTER}")
-	  Sleep($LOADING_TIME_SLOW_PC_RELATED)
+	;~   Sleep($LOADING_TIME_SLOW_PC_RELATED)
 
-	  Sleep(5000)
+	;~   Sleep(5000)
+	  CheckIfPageIsLoaded()
 
 	  Send("^w") ;closes the tab and goes back to the tab where you started
 	  Sleep($LOADING_TIME_SLOW_PC_RELATED)

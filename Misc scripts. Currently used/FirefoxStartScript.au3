@@ -1,6 +1,8 @@
 #include <AutoItConstants.au3>
+#include "..\Constants.au3"
+#include "..\CheckIfPageIsLoaded.au3"
 
-Global Const $LOADING_TIME_SLOW_PC_RELATED = 800 ;don't go lower than that
+;you can definately use CheckIfPageIsLoaded() here instead of Sleep
 
 If @UserName = "User" Then ;if YP PC
 	Run(@ProgramFilesDir & "\Mozilla Firefox\firefox.exe", "", @SW_SHOWMAXIMIZED) ;tested at the YP
@@ -15,16 +17,23 @@ If @UserName = "User" Then ;if YP PC
 	Send("p")
 	Sleep($LOADING_TIME_SLOW_PC_RELATED)
 	Send("{CTRLDOWN}3{CTRLUP}")
-	Sleep($LOADING_TIME_SLOW_PC_RELATED * 10)
+    CheckIfPageIsLoaded()
 
 	Send("{SHIFTDOWN}{TAB}{SHIFTUP}")
-	Sleep($LOADING_TIME_SLOW_PC_RELATED * 10) ;3 is necessary here, to be safe, although it should be checked if pixels match, as that will make sure that the page loaded itself
+    CheckIfPageIsLoaded()
 	Send("{DOWN}")
-	Sleep($LOADING_TIME_SLOW_PC_RELATED * 10) ;2 is necessary here
+    CheckIfPageIsLoaded()
+	Send("{ENTER}")
+    CheckIfPageIsLoaded()
+    Send("{CTRLDOWN}l{CTRLUP}")
+	Sleep($LOADING_TIME_SLOW_PC_RELATED)
+	Send("https://www.skywaresystems.net/WizResvCheckIn.aspx?UserString=2627263527354456555942453526584267276460653527252634262726342632262729302632&Status=RESV&WizAct=CHECKIN&MenuRowID=1&SKYMENU=CLEAR")
+	Sleep($LOADING_TIME_SLOW_PC_RELATED)
 	Send("{ENTER}")
 
+
 	Send("{CTRLDOWN}4{CTRLUP}") ;mail
-	Sleep($LOADING_TIME_SLOW_PC_RELATED * 10)
+    CheckIfPageIsLoaded()
 	Send("{TAB}")
 	Sleep($LOADING_TIME_SLOW_PC_RELATED)
 	Send("{DOWN}")
@@ -36,10 +45,10 @@ If @UserName = "User" Then ;if YP PC
 	Send("{ENTER}")
 
 	Send("{CTRLDOWN}5{CTRLUP}")
-	Sleep($LOADING_TIME_SLOW_PC_RELATED * 10)
+    CheckIfPageIsLoaded()
 	Send("{CTRLDOWN}l{CTRLUP}")
 	Sleep($LOADING_TIME_SLOW_PC_RELATED)
-	Send("https://www.skywaresystems.net/Dashboard.aspx?UserString=2627263527354456555942453526584267276460653527252634253427332727303028253433&XSession1=PropertyRowID--121")
+	Send("https://www.skywaresystems.net/RoomChart.aspx?UserString=2627263527354456555942453526584267276460653527252634262726342632263427272634&MenuRowID=19&SKYMENU=CLEAR")
 	Sleep($LOADING_TIME_SLOW_PC_RELATED)
 	Send("{ENTER}")
 

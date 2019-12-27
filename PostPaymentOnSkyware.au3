@@ -35,17 +35,7 @@ Func PostPaymentOnSkyware($amount)
 		Sleep(100)
 	WEnd
 
-;~ 	Sleep(10000)
-
-;~     Send("{ENTER}")      ;send ENTER to agree
 	Sleep($LOADING_TIME_SLOW_PC_RELATED)
-
-;~ 	MouseClick("left", 392, 421, 1, 0)      ;click 392, 421 then send arror down, then send ENTER and wait for the skyware to load
-;~ 	Sleep($LOADING_TIME_SLOW_PC_RELATED)
-;~ 	Send("{DOWN}")
-;~ 	Sleep($LOADING_TIME_SLOW_PC_RELATED)
-;~ 	Send("{ENTER}")
-;~ 	Sleep($LOADING_TIME_SLOW_PC_RELATED)
 
 	While $g_iCheckSumSkywareIcon <> PixelChecksum($g_aSkywareIconLocation[$firstParam], $g_aSkywareIconLocation[$secondParam], $g_aSkywareIconLocation[$thirdParam], $g_aSkywareIconLocation[$fourthParam])     ;change it while it's not equal to preset number, sleep, then carry on with execution as it should
 		Sleep(100)
