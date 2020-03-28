@@ -18,7 +18,7 @@ _WinWaitActivate("Mozilla Firefox","")
 If @UserName = "User" Then ;if YP PC
 	Local Const $iPixelChecksum = 116970486
 	Local Const $iCashYcoordinate = 302
-	MouseClick("left", 1209, 45, 1, 10)
+	MouseClick("left", 1259, 45, 1, 10)
 ElseIf @UserName = "Ballantrae" Then ;if albany left PC
 	Local Const $iPixelChecksum = 3388790433
 	Local Const $iCashYcoordinate = 329

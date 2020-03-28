@@ -3,6 +3,16 @@
 
 Func PrintOutSiteminderPaperwork()
 
+
+   If @UserName = "User" Then ;if YP PC
+	  Local Const $sEmailAddress = "info@ballantraehotel.co.uk"
+   ElseIf @UserName = "Ballantrae" Then ;if albany left PC
+	  Local Const $sEmailAddress = "info@ballantrae-albanyhotel.co.uk"
+   Else
+	   MsgBox(0, "", "" & @UserName & " is unsupported")
+	   Exit
+   EndIf
+
 	If StringRegExp($g_sClipboardWithBookingNumber, "(SiteMinder|Agoda)") = False And _
 			StringRegExp($g_sClipboardWithBookingNumber, "(Expedia Collect Booking|virtual credit card)") = False Then
 
@@ -17,7 +27,9 @@ Func PrintOutSiteminderPaperwork()
 
 		MouseClick("left", 873, 742, 1, 0)     ;clicks on the siteminder link, it will automatically open a new tab
 
-		TrayTip("", "Pauses the script until the Ctrl+P is pressed. Takes control from there. Do not close the siteminder tab.", 5)
+		ClipPut($sEmailAddress) ;put the email address into clipboard, to speed up logging into siteminder
+
+		TrayTip("", "Pauses the script until the Ctrl+P is pressed. Takes control from there. Do not close the siteminder tab. If you need to log-in to sitemider - the email address in already in the clipboard", 5)
 
 		Do
 			Sleep(100)
