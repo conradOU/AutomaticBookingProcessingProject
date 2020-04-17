@@ -58,6 +58,7 @@ Func CheckIfPageIsLoaded()
 
 		$iTimeoutCounter += 50
 		Sleep(50)
+		;Send("{ENTER}") ;closes any pop-up dialogs
 
 		If $bWasFirefoxTransferringVisible = False _
 				And _
@@ -74,9 +75,14 @@ Func CheckIfPageIsLoaded()
 				$aFirefoxLoadingStatusBarLocation[$fourthParam]) _
 				And _
 				$iTimeoutCounter >= $iTimeoutInMS Then
-
+;~ 			Send("{ENTER}") ;closes any pop-up dialogs
 			Return True
-		EndIf
+		 EndIf
+
+		 if $iTimeoutCounter >= $iTimeoutInMS Then
+			Send("{ENTER}") ;closes any pop-up dialogs
+		 EndIf
+
 
 	WEnd
 	;make sure to wait afterwards, as the page is still renedering
